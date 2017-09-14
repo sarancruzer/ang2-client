@@ -1,16 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Router } from "@angular/router";
+import { BarService } from "./_services/bar.service";
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers:[BarService]
 })
 export class AppComponent implements OnInit {
 
-  constructor(public location: Location) {}
+  private locationURL : any;
 
+  constructor(public location: Location,private  router : Router,private bar : BarService) {
+    this.locationURL = this.router.url;
+  }
+  
   ngOnInit() {
+    this.router.navigate(['/dashboard']);  
   }
 
     isMaps(path){

@@ -17,6 +17,10 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { LoginComponent } from './login/login.component';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentService } from "app/_services/comment.service";
+import { EditcommentsComponent } from './editcomments/editcomments.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    LoginComponent,
+    CommentsComponent,
+    EditcommentsComponent,
+    
 
   ],
   imports: [
@@ -39,7 +47,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 RouterModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

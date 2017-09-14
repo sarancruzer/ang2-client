@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { BarService } from "app/_services/bar.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,10 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bar : BarService) { 
+    this.bar.show();
+  }
+  
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
