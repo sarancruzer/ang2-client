@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CommentService } from "app/_services/comment.service";
 import { Comment } from "../_models/comment";
 import { Employee  } from "../_models/employee";
@@ -12,46 +12,25 @@ import { Employee  } from "../_models/employee";
 export class EditcommentsComponent implements OnInit {
 
   id : number;
-  comments: Comment[];
   cSuccess : string;
-  public currentEmployee: Employee;
 
-  constructor(private _route: ActivatedRoute,private commentService : CommentService) { 
+  private comments: Comment = {id:0,author:"",text:""};
+  
+  constructor(private _route: ActivatedRoute,private commentService : CommentService,private router:Router) { 
     
   }
  
   ngOnInit() {
-    console.log("edit comments");
     this._route.params.subscribe(params => {
       this.id = params['id'];     
     });
-    console.log(this.id);
-   // this.getCommentsById(this.id);
-
-    this.commentService.getEmployee(this.id).subscribe(
-      employee => {
-        console.log("employee");
-        console.log(employee);
-        this.currentEmployee = employee['result']['info'];       
-        console.log("currentEmployee");
-        console.log(this.currentEmployee);
-        console.log(this.currentEmployee['author']);
-      }
-    );
-
+    this.getCommentsById(this.id);
   }
-
-
- 
 
   getCommentsById(id) {
   this.commentService.getCommentsById(id).subscribe(     
     (res) => {
         this.comments = res['result']['info'];
-        console.log("this.comments");
-        console.log(this.comments);
-        
-       
     },
   (err) => { 
       console.log(err);
@@ -59,10 +38,10 @@ export class EditcommentsComponent implements OnInit {
 }
 
 updateComments(id){
-
-  this.commentService.updateComments(this.currentEmployee,id).subscribe(
+  this.commentService.updateComments(this.comments,id).subscribe(
     (res) => {
-      this.cSuccess = res['result']['msg'];
+     // this.cSuccess = res['result']['msg'];
+      this.router.navigate(['/comments']);  
     },
     (err) => {
       console.log(err);

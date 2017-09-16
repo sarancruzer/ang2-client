@@ -14,6 +14,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { LoginComponent } from "app/login/login.component";
 import { CommentsComponent } from "app/comments/comments.component";
 import { EditcommentsComponent } from "../app/editcomments/editcomments.component"
+import { AddcommentsComponent } from "app/addcomments/addcomments.component";
 
 const routes: Routes =[
     { path: 'dashboard',      component: DashboardComponent },
@@ -28,6 +29,8 @@ const routes: Routes =[
     { path: 'comments',       component: CommentsComponent },
     { path: '',               redirectTo: 'login', pathMatch: 'full' },
     { path: 'comments/edit/:id',    component: EditcommentsComponent },    
+    { path: 'addcomment',    component: AddcommentsComponent },    
+    
 ];
 
 @NgModule({

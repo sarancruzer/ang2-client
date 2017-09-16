@@ -21,6 +21,10 @@ import { LoginComponent } from './login/login.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentService } from "app/_services/comment.service";
 import { EditcommentsComponent } from './editcomments/editcomments.component';
+import { AddcommentsComponent } from './addcomments/addcomments.component';
+
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,7 @@ import { EditcommentsComponent } from './editcomments/editcomments.component';
     LoginComponent,
     CommentsComponent,
     EditcommentsComponent,
-    
+    AddcommentsComponent
 
   ],
   imports: [
@@ -44,8 +48,9 @@ import { EditcommentsComponent } from './editcomments/editcomments.component';
     FormsModule,
     HttpModule,
     ComponentsModule,
-RouterModule,
-    AppRoutingModule
+    RouterModule,
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [CommentService],
   bootstrap: [AppComponent]

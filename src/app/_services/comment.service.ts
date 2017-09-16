@@ -16,6 +16,7 @@ export class CommentService {
 
   headers: Headers;
   options: RequestOptions;
+  comment:Comment[];
 
   constructor (private http: Http) {
     this.headers = new Headers({ 'Content-Type': 'application/json', 
@@ -27,8 +28,8 @@ export class CommentService {
   private commentsUrl = 'http://localhost:8000/api/'; 
   
   // Fetch all existing comments
-  getComments() : Observable<Comment[]> {
-      return this.http.get(this.commentsUrl+'getComments')
+  getComments(page:any) : Observable<Comment[]> {
+      return this.http.get(this.commentsUrl+'getComments?page='+page)
       .map((res:Response) => <Comment[]>res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -56,36 +57,12 @@ export class CommentService {
     return res.json();
   }
 
-  // updateComments():Observable<Comment[]>{
-  //   let body = JSON.stringify(param);
-  //   return this.http.post(this.commentsUrl+"updateComments",body,options)
-  //   .map((res:Response) => <Comment[]>res.json())
-  //   .catch((error:any) => Observable.throw(error.json().error || 'Server Error'));
-  // }
-
-  updateComments(param: any,id:any): Observable<Comment[]> {
-    console.log(param);
+  updateComments(param: any,id:any):Observable<Comment[]>{
     let body = JSON.stringify(param);
-    let list ={
-      "id":1,
-      "author":"donate",
-      "text":"donate_id"
-    };
-    return this.http
-        .post(this.commentsUrl+"updateComments/"+id, list, this.options)
-        .map(this.extractData)
-        .catch(this.handleError);
-    }   
-
-    // donateOrganization(donate_id,donate){
-    //   this.list ={
-    //    "token":this.token,
-    //    "org_id":donate,
-    //    "id":donate_id
-    //  }
-    //  return this.http.post(`${this.rootUrl}admin_donate_gift`,this.list,this.headers)
-    //     .map(res =>res.json());
-    // }
+    return this.http.post(this.commentsUrl+"updateComments/"+id,body,this.options)
+    .map((res:Response) => <Comment[]>res.json())
+    .catch((error:any) => Observable.throw(error.json().error || 'Server Error'));
+  }
 
     private extractData(res: Response) {
       let body = res.json();
@@ -99,5 +76,12 @@ export class CommentService {
       return Observable.throw(errMsg);
   }  
 
+  saveComments(param:any):Observable<Comment[]>{
+    let body = JSON.stringify(param);
+    return this.http.post(this.commentsUrl+"addComments",body,this.options)
+    .map(res =>  <Comment> res.json())
+    .catch((error:any) => Observable.throw(error.json().error || 'Server Error'));
+
+  }
          
 }

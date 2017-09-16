@@ -11,21 +11,26 @@ import { Comment }  from '../_models/comment';
 export class CommentsComponent implements OnInit {
   
   comments: Comment[];
+  page: number = 1;
+  total: number;
 
-  constructor(private bar:BarService,private commentService:CommentService) { }
+  constructor(private bar:BarService,private commentService:CommentService) { 
 
+  }
 
   ngOnInit() {
     this.bar.show();
-    this.loadComments();
+    this.loadComments(1);
   }
 
-loadComments() {
-  this.commentService.getComments().subscribe(     
+loadComments(event) {
+  console.log(event);
+  this.commentService.getComments(event).subscribe(     
     (res) => {
         console.log(res);
         this.comments = res['result']['info']['data'];
-       
+        this.total = res['result']['info']['total'];;
+        this.page = res['result']['info']['current_page'];;
     },
   (err) => { 
       console.log(err);
