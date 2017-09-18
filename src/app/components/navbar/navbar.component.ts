@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef,private bar:BarService) {
+    constructor(location: Location,  private element: ElementRef,public bar:BarService) {
       this.location = location;
           this.sidebarVisible = false;
     }

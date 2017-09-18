@@ -14,7 +14,7 @@ export class EditcommentsComponent implements OnInit {
   id : number;
   cSuccess : string;
 
-  private comments: Comment = {id:0,author:"",text:""};
+  public comments: Comment = {id:0,author:"",text:""};
   
   constructor(private _route: ActivatedRoute,private commentService : CommentService,private router:Router) { 
     

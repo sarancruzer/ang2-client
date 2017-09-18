@@ -10,7 +10,7 @@ import { CommentService } from "app/_services/comment.service";
 })
 export class AddcommentsComponent implements OnInit {
   
-  private comments: Comment = {id:0,author:"",text:""};
+  public comments: Comment = {id:0,author:"",text:""};
   
   constructor(private router:Router,private commentService:CommentService) { 
   
